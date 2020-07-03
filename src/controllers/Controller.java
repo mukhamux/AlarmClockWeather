@@ -1,20 +1,25 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -101,11 +106,11 @@ public class Controller {
     @FXML
     private Text text2_7;
 
-    private static final DecimalFormat df = new DecimalFormat("0.0");
-    private static
-    final String apiCode = "67ff01ef1bd158284e098eba0512fb5d";
-    final String weekForecastHeadSearch = "http://api.openweathermap.org/data/2.5/forecast?q=";
-    final String currentForecastHeadSearch = "http://api.openweathermap.org/data/2.5/weather?q=";
+    protected static final DecimalFormat df = new DecimalFormat("0.0");
+//    private static
+    protected final static String apiCode = "67ff01ef1bd158284e098eba0512fb5d";
+    protected final static String weekForecastHeadSearch = "http://api.openweathermap.org/data/2.5/forecast?q=";
+    protected final static String currentForecastHeadSearch = "http://api.openweathermap.org/data/2.5/weather?q=";
     private static int informationCounter = 0;
     private final List<List<Text>> tableOfText = new ArrayList<>();
 
@@ -120,26 +125,25 @@ public class Controller {
 
         searchButton.setOnAction(value -> {
             if (!cityName.getText().isEmpty()) {
-                String city = cityName.getText().replace(' ', '+');
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("currentForecast.fxml"));
+                Parent root = null;
+                CurrentForecastController controller = null;
                 try {
-                    String currentWeatherResponse = sendGET(currentForecastHeadSearch + city + "&appid=" + apiCode);
-                    String weekWeatherResponse = sendGET(weekForecastHeadSearch + city + "&appid=" + apiCode);
-
-                    fillCurrentParameters(currentWeatherResponse);
-                    fillForecastTable(weekWeatherResponse);
-
-                    workList.setVisible(true);
+                    root = loader.load();
+                    controller = loader.<CurrentForecastController>getController();
+                    controller.setCity(cityName.getText().replace(' ', '+'));
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
-            } else {
-                setEmptySearchField();
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
             }
         });
 
         List<String> times = new ArrayList<>();
         setAlarm.setOnAction(value -> {
-//            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
             if (!cityName.getText().isEmpty()) {
                 String tmpTime;
@@ -177,7 +181,7 @@ public class Controller {
         cityName.setPromptText("Необходимо ввести город!");
     }
 
-    private static String sendGET(String path) throws IOException {
+    protected static String sendGET(String path) throws IOException {
         URL request = new URL(path);
         HttpURLConnection connection = (HttpURLConnection) request.openConnection();
         connection.setRequestMethod("GET");
@@ -192,30 +196,7 @@ public class Controller {
         }
     }
 
-    private void fillCurrentParameters(String information) throws ParseException {
-        JSONObject json = parse(information);
-        JSONObject main = (JSONObject) json.get("main");
-        JSONArray weather = (JSONArray) json.get("weather");
-        JSONObject wind = (JSONObject) json.get("wind");
-
-        double realTemperatureValue = (double) main.get("temp") - 273;
-        double sensationTemperatureValue = (double) main.get("feels_like") - 273;
-        JSONObject commonWeather = (JSONObject) weather.get(0);
-        String descriptionWeather = (String) commonWeather.get("description");
-        double speed;
-        try {
-            speed = (long) wind.get("speed");
-        } catch (ClassCastException e) {
-            speed = (double) wind.get("speed");
-        }
-
-        realTemperature.setText(df.format(realTemperatureValue) + " °C");
-        sensationTemperature.setText(df.format(sensationTemperatureValue) + " °C");
-        commonState.setText(descriptionWeather);
-        windSpeed.setText(df.format(speed) + " м/с");
-    }
-
-    private void fillForecastTable(String information) throws ParseException {
+    private void fillForecastTable(String information) throws ParseException, FileNotFoundException {
         grid.getChildren().removeIf(node -> grid.getColumnIndex(node) != null); // удаляем все ячейки кроме первого столбца, по дефолту null только у нулевого индекса.
 
         handleColumn(1, information);
@@ -228,12 +209,12 @@ public class Controller {
         informationCounter = 0;
     }
 
-    JSONObject parse(String information) throws ParseException {
+    protected static JSONObject parse(String information) throws ParseException {
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(information);
     }
 
-    private void handleColumn(int columnIndex, String information) throws ParseException {
+    private void handleColumn(int columnIndex, String information) throws ParseException, FileNotFoundException {
         JSONObject json = parse(information);
         JSONArray list = (JSONArray) json.get("list");
 
@@ -243,6 +224,10 @@ public class Controller {
         LocalDateTime dateTime = LocalDateTime.parse(dtText, formatter);
         double temperature;
         int startRow = columnIndex == 2 ? 0 : dateTime.getHour() / 3;
+//        Image image = new Image(new FileInputStream("images\\sun.png"));
+//        ImageView imageView = new ImageView(image);
+//        imageView.setFitWidth(25);
+//        imageView.setFitHeight(25);
 
         for (int i = startRow; i < 8; i++) {
             period = (JSONObject) list.get(informationCounter++);
@@ -255,6 +240,8 @@ public class Controller {
             tableOfText.get(columnIndex-1).get(i).setCursor(Cursor.HAND);
             tableOfText.get(columnIndex-1).get(i).setWrappingWidth(35);
             tableOfText.get(columnIndex-1).get(i).setTextAlignment(TextAlignment.CENTER);
+//            HBox box = new HBox();
+//            box.getChildren().addAll(tableOfText.get(columnIndex-1).get(i), imageView);
             grid.add(tableOfText.get(columnIndex-1).get(i), columnIndex, i);
         }
     }

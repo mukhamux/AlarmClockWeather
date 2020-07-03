@@ -7,14 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <TextField fx:id="cityName" layoutX="65.0" layoutY="51.0" prefHeight="34.0" prefWidth="197.0" promptText="Город" />
-      <Button fx:id="searchButton" layoutX="283.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" text="Получить данные" />
+      <Button fx:id="searchButton" layoutX="283.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" text="Текущая погода" />
       <AnchorPane fx:id="workList" layoutX="15.0" layoutY="131.0" prefHeight="302.0" prefWidth="798.0">
          <children>
             <Text layoutX="24.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Температура:" wrappingWidth="121.33673095703125">
@@ -83,10 +84,6 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="18:00" textAlignment="CENTER" wrappingWidth="44.37703323364258" GridPane.rowIndex="6" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="21:00" textAlignment="CENTER" wrappingWidth="44.37703323364258" GridPane.rowIndex="7" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" GridPane.columnIndex="1" />
-                  <Text fx:id="text1_0" strokeType="OUTSIDE" strokeWidth="0.0" style="-rtfx-background-color: #a460ff;" text="Text" GridPane.columnIndex="1">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor></Text>
                   <Text fx:id="text1_1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Text fx:id="text1_2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Text fx:id="text1_3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -102,6 +99,15 @@
                   <Text fx:id="text2_5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <Text fx:id="text2_6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                   <Text fx:id="text2_7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Text fx:id="text1_0" strokeType="OUTSIDE" strokeWidth="0.0" style="-rtfx-background-color: #a460ff;" text="Text">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -111,6 +117,7 @@
             <Text layoutX="635.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Завтра" />
          </children>
       </AnchorPane>
-      <Button fx:id="setAlarm" layoutX="585.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" text="Поставить будильник" />
+      <Button fx:id="setAlarm" layoutX="585.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" text="Прогноз" />
+      <Button layoutX="559.0" layoutY="521.0" mnemonicParsing="false" text="Поставить будильник" />
    </children>
 </AnchorPane>
