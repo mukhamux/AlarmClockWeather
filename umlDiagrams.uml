@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>controllers</OriginalElement>
+  <nodes>
+    <node x="110.37324561403511" y="190.0">web.Web</node>
+    <node x="10.5" y="424.0">web.Loader</node>
+    <node x="191.7947368421053" y="0.0">web.TypeRequest</node>
+    <node x="58.25" y="528.0">controllers.CurrentForecastController</node>
+    <node x="28.133333333333354" y="782.0">controllers.Controller</node>
+    <node x="452.8732456140351" y="0.0">Main</node>
+    <node x="153.25833333333335" y="1214.0">jobs.Checker</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jobs.Checker" target="web.Web">
+      <point x="29.5" y="-48.0" />
+      <point x="300.7583333333333" y="1189.0" />
+      <point x="347.1333333333333" y="1189.0" />
+      <point x="347.1333333333333" y="399.0" />
+      <point x="344.5399122807018" y="399.0" />
+      <point x="93.66666666666669" y="92.0" />
+    </edge>
+    <edge source="web.Web" target="web.TypeRequest">
+      <point x="0.0" y="-92.0" />
+      <point x="250.8732456140351" y="165.0" />
+      <point x="290.7947368421053" y="165.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="controllers.CurrentForecastController" target="controllers.Controller">
+      <point x="62.0" y="102.0" />
+      <point x="244.25" y="752.0" />
+      <point x="184.23333333333338" y="752.0" />
+      <point x="44.60000000000002" y="-191.0" />
+    </edge>
+    <edge source="jobs.Checker" target="controllers.Controller">
+      <point x="-88.5" y="-48.0" />
+      <point x="182.75833333333335" y="1189.0" />
+      <point x="83.88333333333335" y="1189.0" />
+      <point x="-55.75" y="191.0" />
+    </edge>
+    <edge source="controllers.Controller" target="controllers.CurrentForecastController">
+      <point x="0.0" y="-191.0" />
+      <point x="139.63333333333335" y="762.0" />
+      <point x="120.25" y="762.0" />
+      <point x="-62.0" y="102.0" />
+    </edge>
+    <edge source="jobs.Checker" target="web.TypeRequest">
+      <point x="88.5" y="-48.0" />
+      <point x="359.7583333333333" y="1189.0" />
+      <point x="401.8732456140351" y="1189.0" />
+      <point x="401.8732456140351" y="165.0" />
+      <point x="356.7947368421053" y="165.0" />
+      <point x="66.0" y="70.0" />
+    </edge>
+    <edge source="web.Loader" target="web.Web">
+      <point x="0.0" y="-27.0" />
+      <point x="115.0" y="399.0" />
+      <point x="157.20657894736843" y="399.0" />
+      <point x="-93.66666666666667" y="92.0" />
+    </edge>
+    <edge source="controllers.Controller" target="web.Loader">
+      <point x="-44.599999999999966" y="-191.0" />
+      <point x="95.03333333333339" y="752.0" />
+      <point x="47.75" y="752.0" />
+      <point x="47.75" y="503.0" />
+      <point x="62.75" y="503.0" />
+      <point x="-52.25" y="27.0" />
+    </edge>
+    <edge source="controllers.CurrentForecastController" target="web.Loader">
+      <point x="0.0" y="-102.0" />
+      <point x="182.25" y="503.0" />
+      <point x="167.25" y="503.0" />
+      <point x="52.25" y="27.0" />
+    </edge>
+    <edge source="controllers.Controller" target="jobs.Checker">
+      <point x="55.75" y="191.0" />
+      <point x="195.38333333333335" y="1189.0" />
+      <point x="241.75833333333335" y="1189.0" />
+      <point x="-29.5" y="-48.0" />
+    </edge>
+    <edge source="controllers.Controller" target="web.TypeRequest">
+      <point x="-89.19999999999996" y="-191.0" />
+      <point x="50.433333333333394" y="762.0" />
+      <point x="0.0" y="762.0" />
+      <point x="0.0" y="165.0" />
+      <point x="224.7947368421053" y="165.0" />
+      <point x="-66.0" y="70.0" />
+    </edge>
+    <edge source="controllers.Controller" target="web.Web">
+      <point x="89.19999999999999" y="-191.0" />
+      <point x="228.83333333333334" y="762.0" />
+      <point x="316.75" y="762.0" />
+      <point x="316.75" y="399.0" />
+      <point x="250.8732456140351" y="399.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="124.0" y="303.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
